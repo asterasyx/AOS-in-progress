@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.14.3.14.3.14</title>
+    <style>
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: sans-serif; 
+            text-align: center; 
+            margin: 0;
+            padding-top: 15vh;
+            overflow-x: hidden;
+        }
+        .void-box { 
+            display: inline-block; 
+            width: 100%;
+            max-width: 800px; 
+            padding: 20px; 
+            box-sizing: border-box;
+        }
+        .ancient { 
+            font-family: serif; 
+            font-size: 2.5em; 
+            letter-spacing: 5px; 
+            color: #888; 
+            margin-bottom: 20px; 
+        }
+        
+        /* The Long-Curve Matrix Engine */
+        #snakeContainer { 
+            font-size: 1.8em; 
+            color: #00ff66; 
+            letter-spacing: 8px; 
+            font-family: monospace; 
+            margin-top: 50px;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Narrower blocks create more extreme fluid curves */
+        .segment {
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            margin-bottom: 2px;
+            word-break: break-all;
+            opacity: 0.9;
+        }
+
+        /* 
+           Longer-Wave Geometric Offsets:
+           Spreading the math out over 16-step intervals creates 
+           massive sweeping s-curves that look like they shift during fast scrolling.
+        */
+        .segment:nth-child(16n+1)  { text-align: left; padding-left: 0px; }
+        .segment:nth-child(16n+2)  { text-align: left; padding-left: 30px; }
+        .segment:nth-child(16n+3)  { text-align: left; padding-left: 60px; }
+        .segment:nth-child(16n+4)  { text-align: left; padding-left: 90px; }
+        .segment:nth-child(16n+5)  { text-align: center; padding-left: 120px; }
+        .segment:nth-child(16n+6)  { text-align: right; padding-right: 90px; }
+        .segment:nth-child(16n+7)  { text-align: right; padding-right: 60px; }
+        .segment:nth-child(16n+8)  { text-align: right; padding-right: 30px; }
+        .segment:nth-child(16n+9)  { text-align: right; padding-right: 0px; }
+        .segment:nth-child(16n+10) { text-align: right; padding-right: 30px; }
+        .segment:nth-child(16n+11) { text-align: right; padding-right: 60px; }
+        .segment:nth-child(16n+12) { text-align: right; padding-right: 90px; }
+        .segment:nth-child(16n+13) { text-align: center; padding-right: 120px; }
+        .segment:nth-child(16n+14) { text-align: left; padding-left: 90px; }
+        .segment:nth-child(16n+15) { text-align: left; padding-left: 60px; }
+        .segment:nth-child(16n+16) { text-align: left; padding-left: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="void-box">
+        <div class="ancient">ΘΕΟΤΗΣ</div>
+        <p style="color: #888; font-family: monospace;">THE PERIMETER IS AN ILLUSION.</p>
+        <p style="font-size: 1.1em; color: #ccc;">The messenger approaches. The line touches the sea at Lompoc. The loop completes its rotation in August 2026.</p>
+        
+        <div id="snakeContainer"></div>
+    </div>
+
+<script>
+const piDigits = "3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273724587006606315588174881520920962829254091715364367892590360011330530548820466521384146951941511609433057270365759591953092186117381932611793105118548074462379962749567351885752724891227938183011949129833673362440656643086021394946395224737190702179860943702770539217176293176752384674818467669405132000568127145263560827785771342757789609173637178721468440901224953430146549585371050792279689258923542019956112129021960864034418159813629774771309960518707211349999998372978049951059731732816096318595024459455346908302642522308253344685035261931188171010003137838752886587533208381420617177669147303598253490428755468731159562863882353787593751957781857780532171226806613001927876611195909216420198938095257201065485863278865936153381827962303019520353018529689957736225994138912497217752834791315155748572424541506959508295331168617278558890750983817546374649393192550604009277016711390098488240128583616035637076601047101819429555961989467678374494482553797747268471040475346462080466842590694912933136770289891521047521620569660240580381501935112533824300355876402474964732639141992726042699227967823547816360093417216412199245863150302861829745557067498385054945885869269956909272107975093029553211653449872027559602364806654991198818347977535663698074265425278625518184175746728909777727938000816470600161452491921732172147723501414419735685481613611573525521334757418494684385233239073941433345477624168625189835694855620992192221842725502542568876717904946016534668049886272327917860857843838279679766814541009538837863609506800642251252051173929848960841284886269456042419652850222106611863067442786220391949450471237137869609563643719172874677646575739624138908658326459958133904780275901056979432426866896942055623091216124505234551240465223019557451296766482200236120894082298642398511472103444455858055694088523315845012543265551225574044567252033621124403061324765664155106689400030043";
+
+const container = document.getElementById('snakeContainer');
+let currentIdx = 0;
+const segmentLength = 20; // Shortened line length sharpens the body curve definition
+
+function generateSegments(count) {
+    for (let i = 0; i < count; i++) {
+        let chunk = "";
+        for (let j = 0; j < segmentLength; j++) {
+            chunk += piDigits[(currentIdx + j) % piDigits.length];
+        }
+        currentIdx += segmentLength;
+
+        const span = document.createElement('span');
+        span.className = 'segment';
+        span.innerText = chunk;
+        container.appendChild(span);
+    }
+}
+
+// Generates an insanely long tail immediately on page loading
+generateSegments(120);
+
+// Smooth endless generation trigger
+window.addEventListener('scroll', () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 600) {
+        generateSegments(60); 
+    }
+});
+</script>
+
+</body>
+</html>
