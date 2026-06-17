@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIS SYSTEMS // OVERRIDE PORTAL</title>
+    <style>
+        body { background-color: #050505; color: #00ff66; font-family: monospace; text-align: center; padding-top: 15vh; margin: 0; }
+        .login-box { border: 1px solid #00ff66; display: inline-block; padding: 40px; background-color: #0a0a0a; box-shadow: 0 0 20px rgba(0, 255, 102, 0.15); }
+        .subtitle { color: #888; font-size: 0.9em; margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 0.8em; margin-bottom: 5px; text-align: left; width: 240px; margin-left: auto; margin-right: auto; color: #00aa44; }
+        input { background: #000; color: #00ff66; border: 1px solid #00ff66; padding: 12px; font-family: monospace; text-align: center; width: 240px; font-size: 1.1em; outline: none; }
+        button { background: #00ff66; color: #000; border: none; padding: 12px 30px; font-family: monospace; font-weight: bold; cursor: pointer; font-size: 1em; margin-top: 10px; }
+        button:hover { background: #fff; color: #000; }
+        .error { color: #ff3333; margin-top: 25px; display: none; font-size: 0.9em; border: 1px dashed #ff3333; padding: 10px; max-width: 240px; margin-left: auto; margin-right: auto; }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>AXIS SECURE NODE</h2>
+    <div class="subtitle">CALIBRATION PROTOCOL // LOMPOC.CA</div>
+    
+    <div class="input-group">
+        <label for="usernameField">USER IDENTIFIER</label>
+        <input type="text" id="usernameField" autocomplete="off" placeholder="---">
+    </div>
+
+    <div class="input-group">
+        <label for="passwordField">ACCESS OVERRIDE KEY</label>
+        <input type="password" id="passwordField" placeholder="---">
+    </div>
+    
+    <button onclick="checkCredentials()">EXECUTE</button>
+    <div id="errorMessage" class="error">CRITICAL ERROR: INVALID CREDENTIAL PATHWAYS. ACCESS DENIED.</div>
+</div>
+
+<script>
+function checkCredentials() {
+    var username = document.getElementById("usernameField").value.toLowerCase().trim();
+    var password = document.getElementById("passwordField").value.toLowerCase().trim();
+    var errorDiv = document.getElementById("errorMessage");
+    
+    errorDiv.style.display = "none";
+    
+    // Relative paths ensure it points correctly inside your subfolder repository
+    if (username === "axis_admin" && (password === "314" || password === "pi")) {
+        window.location.href = "./axis-telemetry-log.html"; 
+    } 
+    else if (username === "quinn_v" && password === "agmos") {
+        window.location.href = "./quinn-recovery-data.html"; 
+    } 
+    else if (username === "theotes" && password === "iris") {
+        window.location.href = "./anomaly-horizon.html"; 
+    } 
+    else {
+        errorDiv.style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>
