@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3.14.3.14.3.14</title>
     <style>
+        <script>
+    var currentReferrer = document.referrer;
+    if (!currentReferrer.includes("index.html") && currentReferrer !== "" && !currentReferrer.includes("/AOS-in-progress/")) {
+        document.documentElement.innerHTML = "";
+        window.location.href = "index.html";
+    }
+</script>
         body { 
             background-color: #000; 
             color: #fff; 
